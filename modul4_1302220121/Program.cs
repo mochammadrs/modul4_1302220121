@@ -1,6 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 
-public class KodeBuah
+/* public class KodeBuah
 {
     public enum Buah
     {
@@ -58,5 +58,56 @@ public class KodeBuah
         Buah buah14 = Buah.Semangka;
         Console.WriteLine("Buah " + buah14 + " dengan Kode Buah " + GetKodeBuah(buah14));
     }
-}
+} */
 
+public class PosisiKarakterGame
+{
+    public enum KarakterState {Jongkok, Berdiri, Tengkurap, Terbang}
+
+    public KarakterState currentState;
+
+    public PosisiKarakterGame()
+    {
+        currentState = KarakterState.Berdiri;
+        Console.WriteLine("TombolW");
+    }
+
+    public void Terbang()
+    {
+        currentState = KarakterState.Terbang;
+        if (currentState == KarakterState.Jongkok)
+        {
+            currentState = KarakterState.Jongkok;
+            Console.WriteLine("Posisi Landing");
+        }
+        Console.WriteLine("Posisi Landing");
+    }
+
+    public void Berdiri()
+    {
+        currentState = KarakterState.Berdiri;
+        if (currentState == KarakterState.Terbang)
+        {
+            currentState = KarakterState.Terbang;
+            Console.WriteLine("Posisi Take Off");
+        }
+    }
+
+    public static void Main(string[] args)
+    {
+        PosisiKarakterGame posisiKarakterGame = new PosisiKarakterGame();
+
+        Console.WriteLine("Posisi Awal: Terbang");
+        Console.WriteLine("Trigger: TombolX");
+        Console.WriteLine("Posisi Akhir: Jongkok");
+        Console.Write("Output: ");
+        posisiKarakterGame.Terbang();
+
+        Console.WriteLine("Posisi Awal: Berdiri");
+        Console.WriteLine("Trigger: TombolW");
+        Console.WriteLine("Posisi Akhir: Terbang");
+        Console.Write("Output: ");
+        posisiKarakterGame.Berdiri();
+
+    }
+}
